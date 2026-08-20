@@ -3,6 +3,8 @@
 @import "tailwindcss";
 
 @theme {
+  --font-fraunces: "Fraunces", sans-serif;
+
   --color-canvas: #f1ede4;
   --color-paper: #fbf9f4;
   --color-ink: #1a1a17;
@@ -35,4 +37,8 @@ body {
 }
 .rm-scroll::-webkit-scrollbar-track {
   background-color: transparent;
+}
+
+#resume-upload {
+  width: 155px;
 }

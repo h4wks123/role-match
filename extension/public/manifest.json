@@ -1,0 +1,13 @@
+{
+  "manifest_version": 3,
+  "name": "Role Match",
+  "version": "1.0.0",
+  "description": "Google chrome extension for drafting a cover letter based on the matching brag list / resume and the specific job posting.",
+  "action": {
+    "default_popup": "index.html"
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "permissions": []
+}

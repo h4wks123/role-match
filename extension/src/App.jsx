@@ -1,34 +1,59 @@
 import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
-import "./App.css";
+import Resume from "./routes/resume";
+import Posting from "./routes/posting";
+import Letter from "./routes/letter";
 
 function App() {
-  const [count, setCount] = useState(0);
+  const [page, setPage] = useState(1);
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    <main className="min-h-full w-full min-w-112.5 bg-canvas flex flex-col">
+      <header className="flex gap-4 px-4 py-2 border-b border-light">
+        <div />
+        <div className="flex flex-col gap-1">
+          <h3 className="text-lg">RoleMatch</h3>
+          <span className="text-sm">No resume yet</span>
+        </div>
+      </header>
+      <nav className="flex gap-2 justify-between items-center px-4 py-2 border-b border-light">
+        <div
+          className="flex gap-1 items-center cursor-pointer"
+          onClick={() => setPage(1)}
+        >
+          <div className="bg-ink rounded-full size-6 p-2 flex justify-center items-center">
+            <span className="text-white text-md">1</span>
+          </div>
+          <span className="text-sm">Resume</span>
+        </div>
+        <div
+          className="flex gap-2 items-center cursor-pointer"
+          onClick={() => setPage(2)}
+        >
+          <div className="bg-ink rounded-full size-6 p-2 flex justify-center items-center">
+            <span className="text-white text-md">2</span>
+          </div>
+          <span className="text-sm">Posting</span>
+        </div>
+        <div
+          className="flex gap-2 items-center cursor-pointer"
+          onClick={() => setPage(3)}
+        >
+          <div className="bg-ink rounded-full size-6 p-2 flex justify-center items-center">
+            <span className="text-white text-md">3</span>
+          </div>
+          <span className="text-sm">Letter</span>
+        </div>
+      </nav>
+      {page == 1 ? (
+        <Resume />
+      ) : page == 2 ? (
+        <Posting />
+      ) : page == 3 ? (
+        <Letter />
+      ) : (
+        <Resume />
+      )}
+    </main>
   );
 }
 

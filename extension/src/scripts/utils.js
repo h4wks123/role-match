@@ -23,7 +23,7 @@ export async function textPickerEvents(tabId) {
 
         prevHighlightedText = highlightedText;
         previousOutline = highlightedText.style.outline;
-        highlightedText.style.outline = "1px solid #e7e9ea";
+        highlightedText.style.outline = "3px solid #e8552f";
       }
 
       function handleClick(event) {

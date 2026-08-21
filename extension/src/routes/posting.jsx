@@ -1,15 +1,34 @@
 import { ArrowLeft, ClipboardPaste } from "lucide-react";
 import { textPickerEvents } from "../scripts/utils";
+import { useEffect, useState } from "react";
 
 function Posting() {
+  const [text, setText] = useState("");
+
   async function textPicker() {
     const [tab] = await chrome.tabs.query({
       active: true,
       currentWindow: true,
     });
 
+    if (!tab || !Number.isInteger(tab.id)) return;
+
     await textPickerEvents(tab.id);
   }
+
+  useEffect(() => {
+    chrome.storage.local.get("text").then((result) => {
+      setText(result.text ?? "");
+    });
+
+    function handleStorageChange(changes, areaName) {
+      if (areaName !== "local" || !changes.text) return;
+      setText(changes.text.newValue ?? "");
+    }
+
+    chrome.storage.onChanged.addListener(handleStorageChange);
+    return () => chrome.storage.onChanged.removeListener(handleStorageChange);
+  }, []);
 
   return (
     <section className="flex flex-col justify-between min-h-150">
@@ -32,12 +51,18 @@ function Posting() {
           </button>
           <div className="flex justify-between">
             <span>POSTING TEXT</span>
-            <span>0 chars</span>
+            <span>{text.length} chars</span>
           </div>
           <textarea
             maxLength={1000}
             placeholder="Paste the job description here..."
             className="min-h-95 w-full rounded-md bg-paper border border-light resize-none p-2"
+            value={text}
+            onChange={(event) => {
+              const nextText = event.target.value;
+              setText(nextText);
+              chrome.storage.local.set({ text: nextText });
+            }}
           />
         </div>
       </div>

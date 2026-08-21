@@ -1,6 +1,16 @@
 import { ArrowLeft, ClipboardPaste } from "lucide-react";
+import { textPickerEvents } from "../scripts/utils";
 
 function Posting() {
+  async function textPicker() {
+    const [tab] = await chrome.tabs.query({
+      active: true,
+      currentWindow: true,
+    });
+
+    await textPickerEvents(tab.id);
+  }
+
   return (
     <section className="flex flex-col justify-between min-h-150">
       <div className="flex flex-col gap-2">
@@ -14,7 +24,7 @@ function Posting() {
         </div>
         <div className="flex flex-col gap-2 px-4 w-full">
           <button
-            onClick={() => {}}
+            onClick={() => textPicker()}
             className="w-full bg-accent rounded-md flex justify-center items-center gap-1 px-4 py-2 cursor-pointer hover:bg-accent/85"
           >
             <ClipboardPaste className="text-paper" />

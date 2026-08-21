@@ -1,7 +1,5 @@
-chrome.runtime.onInstalled.addListener(() => {
-  console.log("Chrome extension installed");
-});
-
-chrome.action.onClicked.addListener((tab) => {
-  console.log("Extension icon clicked", tab);
+chrome.runtime.onMessage.addListener((message) => {
+  if (message.type === "text-picked") {
+    console.log("Picked text:", message.text);
+  }
 });

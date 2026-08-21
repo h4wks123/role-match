@@ -82,7 +82,7 @@ function Resume() {
       </div>
       <div className="border-light border-t py-2 px-4 w-full flex justify-end items-center">
         <button className="px-4 py-2 flex justify-center items-center bg-accent cursor-pointer rounded-md">
-          <span className="text-white">Next: Job Posting</span>
+          <span className="text-white text-sm">Next: Job Posting</span>
         </button>
       </div>
     </section>

@@ -33,7 +33,7 @@ function App() {
       <nav className="flex gap-2 justify-between items-center px-4 border-b border-light">
         <div
           className={clsx(
-            "flex gap-2 items-center cursor-pointer px-2 py-3 border-b-2",
+            "flex gap-2 items-center cursor-pointer px-2 py-3 border-b-2 hover:bg-orange-200",
             {
               "border-accent": page === 1,
               "border-transparent": page !== 1,
@@ -48,7 +48,7 @@ function App() {
         </div>
         <div
           className={clsx(
-            "flex gap-2 items-center cursor-pointer px-2 py-3 border-b-2",
+            "flex gap-2 items-center cursor-pointer px-2 py-3 border-b-2 hover:bg-orange-200",
             {
               "border-accent": page === 2,
               "border-transparent": page !== 2,
@@ -63,7 +63,7 @@ function App() {
         </div>
         <div
           className={clsx(
-            "flex gap-2 items-center cursor-pointer px-2 py-3 border-b-2",
+            "flex gap-2 items-center cursor-pointer px-2 py-3 border-b-2 hover:bg-orange-200",
             {
               "border-accent": page === 3,
               "border-transparent": page !== 3,

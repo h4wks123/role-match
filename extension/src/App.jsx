@@ -32,37 +32,49 @@ function App() {
       </header>
       <nav className="flex gap-2 justify-between items-center px-4 border-b border-light">
         <div
-          className={clsx("flex gap-1 items-center cursor-pointer px-2 py-2", {
-            "border-b-2 border-accent": page === 1,
-          })}
+          className={clsx(
+            "flex gap-2 items-center cursor-pointer px-2 py-3 border-b-2",
+            {
+              "border-accent": page === 1,
+              "border-transparent": page !== 1,
+            },
+          )}
           onClick={() => setPage(1)}
         >
-          <div className="bg-ink rounded-full size-5 p-2 flex justify-center items-center">
-            <span className="text-white text-md">1</span>
+          <div className="bg-ink rounded-full size-5 flex justify-center items-center">
+            <span className="text-white text-sm">1</span>
           </div>
-          <span className="text-sm font-semibold">Resume</span>
+          <span className="text-xs font-semibold">Resume</span>
         </div>
         <div
-          className={clsx("flex gap-1 items-center cursor-pointer px-2 py-2", {
-            "border-b-2 border-accent": page === 2,
-          })}
+          className={clsx(
+            "flex gap-2 items-center cursor-pointer px-2 py-3 border-b-2",
+            {
+              "border-accent": page === 2,
+              "border-transparent": page !== 2,
+            },
+          )}
           onClick={() => setPage(2)}
         >
-          <div className="bg-ink rounded-full size-5 p-2 flex justify-center items-center">
-            <span className="text-white text-md">2</span>
+          <div className="bg-ink rounded-full size-5 flex justify-center items-center">
+            <span className="text-white text-sm">2</span>
           </div>
-          <span className="text-sm font-semibold">Posting</span>
+          <span className="text-xs font-semibold">Posting</span>
         </div>
         <div
-          className={clsx("flex gap-1 items-center cursor-pointer px-2 py-2", {
-            "border-b-2 border-accent": page === 3,
-          })}
+          className={clsx(
+            "flex gap-2 items-center cursor-pointer px-2 py-3 border-b-2",
+            {
+              "border-accent": page === 3,
+              "border-transparent": page !== 3,
+            },
+          )}
           onClick={() => setPage(3)}
         >
-          <div className="bg-ink rounded-full size-5 p-2 flex justify-center items-center">
-            <span className="text-white text-md">3</span>
+          <div className="bg-ink rounded-full size-5 flex justify-center items-center">
+            <span className="text-white text-sm">3</span>
           </div>
-          <span className="text-sm font-semibold">Letter</span>
+          <span className="text-xs font-semibold">Letter</span>
         </div>
       </nav>
       <Page />

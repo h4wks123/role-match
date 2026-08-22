@@ -1,6 +1,36 @@
 import { Download, CopyIcon, Sparkles, FileText } from "lucide-react";
+import { CreateMLCEngine } from "@mlc-ai/web-llm";
+import { useEffect } from "react";
 
 function Letter() {
+  async function webLLMInit() {
+    const initProgressCallback = (progress) => {
+      console.log("Model loading progress:", progress);
+    };
+
+    const engine = await CreateMLCEngine("Qwen3-0.6B-q4f16_1-MLC", {
+      initProgressCallback,
+    });
+
+    const messages = [
+      { role: "system", content: "You are a helpful AI assistant." },
+      { role: "user", content: "Hello!" },
+    ];
+
+    console.log(messages);
+
+    const reply = await engine.chat.completions.create({
+      messages,
+    });
+
+    console.log(reply.choices[0].message);
+    console.log(reply.usage);
+  }
+
+  useEffect(() => {
+    webLLMInit();
+  }, []);
+
   return (
     <section className="flex flex-col gap-2 min-h-150">
       <div className="flex items-center px-4">

@@ -42,7 +42,7 @@ function Resume() {
             <span>{text.length} chars</span>
           </div>
           <textarea
-            maxLength={5000}
+            maxLength={7500}
             placeholder="Paste your resume / brag list here..."
             className="min-h-95 w-full rounded-md bg-paper border border-light resize-none p-2"
             value={text}

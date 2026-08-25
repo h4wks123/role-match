@@ -16,13 +16,13 @@ function Posting() {
   }
 
   useEffect(() => {
-    chrome.storage.local.get("page_text").then((result) => {
-      setText(result.page_text ?? "");
+    chrome.storage.local.get("posting_text").then((result) => {
+      setText(result.posting_text ?? "");
     });
 
     function handleStorageChange(changes, areaName) {
-      if (areaName !== "local" || !changes.page_text) return;
-      setText(changes.page_text.newValue ?? "");
+      if (areaName !== "local" || !changes.posting_text) return;
+      setText(changes.posting_text.newValue ?? "");
     }
 
     chrome.storage.onChanged.addListener(handleStorageChange);
@@ -53,14 +53,14 @@ function Posting() {
             <span>{text.length} chars</span>
           </div>
           <textarea
-            maxLength={1000}
+            maxLength={7500}
             placeholder="Paste the job description here..."
             className="min-h-95 w-full rounded-md bg-paper border border-light resize-none p-2"
             value={text}
             onChange={(event) => {
               const nextText = event.target.value;
               setText(nextText);
-              chrome.storage.local.set({ page_text: nextText });
+              chrome.storage.local.set({ posting_text: nextText });
             }}
           />
         </div>

@@ -3,18 +3,48 @@ import { CreateMLCEngine } from "@mlc-ai/web-llm";
 import { useEffect } from "react";
 
 function Letter() {
+  let engine = null;
+
   async function webLLMInit() {
     const initProgressCallback = (progress) => {
       console.log("Model loading progress:", progress);
     };
 
-    const engine = await CreateMLCEngine("Qwen3-0.6B-q4f16_1-MLC", {
+    engine = await CreateMLCEngine("Qwen3-0.6B-q4f16_1-MLC", {
       initProgressCallback,
     });
+  }
+
+  async function createCoverLetter() {
+    const { resume_text, posting_text } = await chrome.storage.local.get([
+      "resume_text",
+      "posting_text",
+    ]);
 
     const messages = [
-      { role: "system", content: "You are a " },
-      { role: "user", content: "Hello!" },
+      {
+        role: "system",
+        content:
+          "Generate a cover letter tailored to the provided job posting, using relevant information from the resume. Do not invent qualifications or experience.",
+      },
+      {
+        role: "user",
+        content: `
+          Here is the candidate's resume:
+
+          --- RESUME ---
+          ${resume_text}
+          --- END RESUME ---
+
+          Here is the job posting:
+
+          --- JOB POSTING ---
+          ${posting_text}
+          --- END JOB POSTING ---
+
+          Write a professional, concise cover letter tailored specifically to this position.
+        `,
+      },
     ];
 
     console.log(messages);
@@ -48,7 +78,7 @@ function Letter() {
       </div>
       <div className="flex flex-col gap-2 px-4">
         <button
-          onClick={() => {}}
+          onClick={() => createCoverLetter()}
           className="w-full bg-accent rounded-md flex justify-center items-center gap-1 px-4 py-2 cursor-pointer hover:bg-accent/85"
         >
           <Sparkles className="text-paper" />

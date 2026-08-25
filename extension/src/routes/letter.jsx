@@ -13,7 +13,7 @@ function Letter() {
     });
 
     const messages = [
-      { role: "system", content: "You are a helpful AI assistant." },
+      { role: "system", content: "You are a " },
       { role: "user", content: "Hello!" },
     ];
 

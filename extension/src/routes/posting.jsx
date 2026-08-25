@@ -12,18 +12,17 @@ function Posting() {
     });
 
     if (!tab || !Number.isInteger(tab.id)) return;
-
     await textPickerEvents(tab.id);
   }
 
   useEffect(() => {
-    chrome.storage.local.get("text").then((result) => {
-      setText(result.text ?? "");
+    chrome.storage.local.get("page_text").then((result) => {
+      setText(result.page_text ?? "");
     });
 
     function handleStorageChange(changes, areaName) {
-      if (areaName !== "local" || !changes.text) return;
-      setText(changes.text.newValue ?? "");
+      if (areaName !== "local" || !changes.page_text) return;
+      setText(changes.page_text.newValue ?? "");
     }
 
     chrome.storage.onChanged.addListener(handleStorageChange);
@@ -61,7 +60,7 @@ function Posting() {
             onChange={(event) => {
               const nextText = event.target.value;
               setText(nextText);
-              chrome.storage.local.set({ text: nextText });
+              chrome.storage.local.set({ page_text: nextText });
             }}
           />
         </div>

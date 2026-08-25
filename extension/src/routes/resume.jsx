@@ -3,7 +3,19 @@ import { useEffect, useState } from "react";
 function Resume() {
   const [text, setText] = useState("");
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    chrome.storage.local.get("resume_text").then((result) => {
+      setText(result.resume_text ?? "");
+    });
+
+    function handleStorageChange(changes, areaName) {
+      if (areaName !== "local" || !changes.resume_text) return;
+      setText(changes.resume_text.newValue ?? "");
+    }
+
+    chrome.storage.onChanged.addListener(handleStorageChange);
+    return () => chrome.storage.onChanged.removeListener(handleStorageChange);
+  }, []);
 
   return (
     <section className="flex flex-col justify-between min-h-150">
@@ -34,11 +46,11 @@ function Resume() {
             placeholder="Paste your resume / brag list here..."
             className="min-h-95 w-full rounded-md bg-paper border border-light resize-none p-2"
             value={text}
-            // onChange={(event) => {
-            //   const nextText = event.target.value;
-            //   setText(nextText);
-            //   chrome.storage.local.set({ text: nextText });
-            // }}
+            onChange={(event) => {
+              const nextText = event.target.value;
+              setText(nextText);
+              chrome.storage.local.set({ resume_text: nextText });
+            }}
           />
         </div>
         <p className="px-4 pb-2 text-sm font-light text-ink">

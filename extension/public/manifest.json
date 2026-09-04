@@ -7,10 +7,11 @@
     "default_popup": "index.html"
   },
   "background": {
-    "service_worker": "background.js"
+    "service_worker": "background.js",
+    "type": "module"
   },
   "content_security_policy": {
-    "extension_pages": "script-src 'self' 'wasm-unsafe-eval'; object-src 'self'"
+    "extension_pages": "style-src-elem 'self' https://cdnjs.cloudflare.com; font-src 'self' https://cdnjs.cloudflare.com; script-src 'self' 'wasm-unsafe-eval'; default-src 'self' data:; connect-src 'self' data: http://localhost:8000 https://huggingface.co https://*.huggingface.co https://raw.githubusercontent.com https://*.githubusercontent.com https://*.hf.co https://*.xethub.hf.co"
   },
   "permissions": ["scripting", "activeTab", "storage"]
 }
